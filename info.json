@@ -1,0 +1,6 @@
+{
+    "author": ["Zirekall"],
+    "description": "A collection of cogs for Red-DiscordBot, including OpenAIChat and some other cogs.",
+    "short": "Cogs for Red-DiscordBot by Zirekall",
+    "install_msg": "Thanks for adding Zirekall's cogs! Available cogs: OpenAIChat. Use [p]cog install Zirekall-Cogs <cogname> to install individual cogs."
+  }
