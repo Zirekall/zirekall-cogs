@@ -1,0 +1,15 @@
+{
+    "name": "OpenAIChat",
+    "short": "Komunikacja z API OpenAI w trybie konwersacji",
+    "description": "Cog umożliwiający komunikację z API OpenAI przez komendy Discord. Obsługuje tryb konwersacji z pamięcią kontekstu, konfigurowalne modele i system prompty.",
+    "end_user_data_statement": "Ten cog przechowuje klucz API OpenAI oraz konfigurację per serwer. Historia konwersacji jest przechowywana w pamięci i nie jest zapisywana na stałe.",
+    "install_msg": "Dziękujemy za instalację OpenAIChat!\n\nAby rozpocząć:\n1. Ustaw klucz API: `[p]aiset apikey <twój_klucz>`\n2. Użyj komendy: `[p]ask <twoje pytanie>`\n\nWięcej opcji konfiguracji: `[p]aiset`",
+    "author": ["Zirekall"],
+    "required_cogs": {},
+    "requirements": ["openai"],
+    "tags": ["openai", "ai", "chat", "gpt", "conversation"],
+    "min_bot_version": "3.5.0",
+    "hidden": false,
+    "disabled": false,
+    "type": "COG"
+}
