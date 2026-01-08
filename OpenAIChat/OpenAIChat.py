@@ -163,7 +163,7 @@ class OpenAIChat(commands.Cog):
     async def aiset_model(self, ctx: commands.Context, model: str):
         """Ustawia model OpenAI do użycia
 
-        Dostępne modele: gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo, itp.
+        Polecane dostępne modele: gpt-5-nano, gpt-5-mini, gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo, itp.
         Domyślnie: gpt-4o-mini
         """
         await self.config.guild(ctx.guild).model.set(model)
