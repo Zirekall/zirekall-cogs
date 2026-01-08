@@ -18,7 +18,7 @@ class OpenAIChat(commands.Cog):
 
         default_guild = {
             "api_key": None,
-            "model": "gpt-4o-mini",
+            "model": "gpt-5-nano",
             "max_history": 10,
             "max_tokens": 100,
             "system_prompt": "Jesteś pomocnym asystentem AI.",
@@ -107,7 +107,7 @@ class OpenAIChat(commands.Cog):
                 response = await client.chat.completions.create(
                     model=model,
                     messages=messages,
-                    max_tokens=max_tokens,
+                    max_completion_tokens=max_tokens,
                 )
 
                 ai_response = response.choices[0].message.content
