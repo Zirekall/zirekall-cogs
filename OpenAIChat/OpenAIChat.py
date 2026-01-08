@@ -114,7 +114,9 @@ class OpenAIChat(commands.Cog):
                 self._add_to_history(ctx.author.id, "assistant", ai_response, max_history)
 
                 # Wyślij odpowiedź (podziel jeśli za długa)
-                parts = await self._split_message(ai_response)
+                header = f"**Prompt od {ctx.author.mention}:** {prompt}\n\n"
+                full_response = header + (ai_response or "")
+                parts = await self._split_message(full_response)
                 for part in parts:
                     await ctx.send(part)
 
