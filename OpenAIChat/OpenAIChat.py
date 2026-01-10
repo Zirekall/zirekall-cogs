@@ -20,7 +20,6 @@ class OpenAIChat(commands.Cog):
             "api_key": None,
             "model": "gpt-4o-mini",
             "max_history": 10,
-            "max_tokens": 100,
             "system_prompt": "Jesteś pomocnym asystentem AI.",
         }
 
@@ -89,7 +88,6 @@ class OpenAIChat(commands.Cog):
 
         model = await self.config.guild(ctx.guild).model()
         max_history = await self.config.guild(ctx.guild).max_history()
-        max_tokens = await self.config.guild(ctx.guild).max_tokens()
         system_prompt = await self.config.guild(ctx.guild).system_prompt()
 
         # Pobierz historię użytkownika
@@ -107,7 +105,6 @@ class OpenAIChat(commands.Cog):
                 response = await client.chat.completions.create(
                     model=model,
                     messages=messages,
-                    max_tokens=max_tokens,
                 )
 
                 ai_response = response.choices[0].message.content
@@ -191,23 +188,6 @@ class OpenAIChat(commands.Cog):
         await self.config.guild(ctx.guild).max_history.set(count)
         await ctx.send(f"Maksymalna historia konwersacji została ustawiona na: {count}")
 
-    @aiset.command(name="maxtokens")
-    async def aiset_maxtokens(self, ctx: commands.Context, count: int):
-        """Ustawia limit max_tokens dla odpowiedzi z OpenAI.
-
-        Domyślnie: 100 (zwykle ~3-4 zdania).
-        """
-        if count < 1:
-            await ctx.send("Liczba musi być większa niż 0.")
-            return
-
-        if count > 4096:
-            await ctx.send("Maksymalna dozwolona wartość to 4096.")
-            return
-
-        await self.config.guild(ctx.guild).max_tokens.set(count)
-        await ctx.send(f"max_tokens został ustawiony na: {count}")
-
     @aiset.command(name="systemprompt")
     async def aiset_systemprompt(self, ctx: commands.Context, *, prompt: str):
         """Ustawia system prompt dla AI
@@ -224,7 +204,6 @@ class OpenAIChat(commands.Cog):
         api_key = await self.config.guild(ctx.guild).api_key()
         model = await self.config.guild(ctx.guild).model()
         max_history = await self.config.guild(ctx.guild).max_history()
-        max_tokens = await self.config.guild(ctx.guild).max_tokens()
         system_prompt = await self.config.guild(ctx.guild).system_prompt()
 
         embed = discord.Embed(
@@ -238,7 +217,6 @@ class OpenAIChat(commands.Cog):
         )
         embed.add_field(name="Model", value=model, inline=True)
         embed.add_field(name="Max historia", value=str(max_history), inline=True)
-        embed.add_field(name="max_tokens", value=str(max_tokens), inline=True)
         embed.add_field(name="System prompt", value=f"```{system_prompt[:100]}...```" if len(system_prompt) > 100 else f"```{system_prompt}```", inline=False)
 
         await ctx.send(embed=embed)
