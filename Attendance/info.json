@@ -1,0 +1,15 @@
+{
+    "name": "Attendance",
+    "short": "Prosta lista obecnosci per serwer",
+    "description": "Cog dodaje komendy obecnosci: jestem, niema, po23 oraz obecnosc. Wybory sa nadpisywane, a lista resetuje sie codziennie wedlug Europe/Warsaw.",
+    "end_user_data_statement": "Ten cog przechowuje dane obecnosci per serwer (mapowanie user_id -> status) i date ostatniego resetu dziennego.",
+    "install_msg": "Dziekujemy za instalacje Attendance! Uzyj komend: [p]jestem, [p]niema, [p]po23 oraz [p]obecnosc.",
+    "author": ["Zirekall"],
+    "required_cogs": {},
+    "requirements": [],
+    "tags": ["obecnosc", "attendance", "lista", "status"],
+    "min_bot_version": "3.5.0",
+    "hidden": false,
+    "disabled": false,
+    "type": "COG"
+}
