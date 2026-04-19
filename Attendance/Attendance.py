@@ -62,7 +62,9 @@ class Attendance(commands.Cog):
         attendance[str(ctx.author.id)] = status
         await guild_conf.attendance.set(attendance)
 
-        await ctx.send(f"**{ctx.author.display_name}**: {self.STATUS_LABELS[status]}\n{self.GIFS[status]}")
+        embed = discord.Embed(color=discord.Color.blue())
+        embed.set_image(url=self.GIFS[status])
+        await ctx.send(f"**{ctx.author.display_name}**: {self.STATUS_LABELS[status]}", embed=embed)
 
     def _member_name(self, guild: discord.Guild, user_id: str) -> str:
         try:
