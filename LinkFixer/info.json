@@ -1,0 +1,15 @@
+{
+    "name": "LinkFixer",
+    "short": "Automatyczna podmiana linkow TikTok i X/Twitter na fx embed",
+    "description": "Cog nasluchuje wiadomosci na serwerze i podmienia linki twitter.com, x.com oraz tiktok.com (w tym skrocone) na odpowiedniki fxtwitter.com i tnktok.com, a nastepnie wysyla wiadomosc ponownie.",
+    "end_user_data_statement": "Ten cog nie przechowuje danych uzytkownikow ani konfiguracji.",
+    "install_msg": "Dziekujemy za instalacje LinkFixer! Po zaladowaniu coga bot automatycznie podmienia linki TikTok i X/Twitter na wersje fx embed.",
+    "author": ["Zirekall"],
+    "required_cogs": {},
+    "requirements": [],
+    "tags": ["tiktok", "twitter", "x", "embed", "fx"],
+    "min_bot_version": "3.5.0",
+    "hidden": false,
+    "disabled": false,
+    "type": "COG"
+}
