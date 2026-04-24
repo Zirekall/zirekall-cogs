@@ -70,5 +70,10 @@ class LinkFixer(commands.Cog):
 
         await message.channel.send(
             content_to_send,
-            allowed_mentions=discord.AllowedMentions.none(),
+            allowed_mentions=discord.AllowedMentions(
+                everyone=False,
+                users=True,
+                roles=True,
+                replied_user=False,
+            ),
         )
