@@ -1,7 +1,7 @@
 import re
 
 import discord
-from redbot.core import commands
+from redbot.core import commands, Config
 from redbot.core.bot import Red
 
 
@@ -17,6 +17,8 @@ class LinkFixer(commands.Cog):
 
     def __init__(self, bot: Red):
         self.bot = bot
+        self.config = Config.get_conf(self, identifier=1234567890, force_registration=True)
+        self.config.register_guild(enabled=True)
 
     @staticmethod
     def _normalized_domain(domain: str) -> str:
@@ -52,6 +54,11 @@ class LinkFixer(commands.Cog):
         if not message.content:
             return
 
+        # Sprawdzenie czy bot jest włączony na tym serwerze
+        enabled = await self.config.guild(message.guild).enabled()
+        if not enabled:
+            return
+
         replaced_content = self.URL_PATTERN.sub(self._replace_url, message.content)
         if replaced_content == message.content:
             return
@@ -77,3 +84,18 @@ class LinkFixer(commands.Cog):
                 replied_user=False,
             ),
         )
+
+    @commands.guild_only()
+    @commands.admin_or_permissions(manage_messages=True)
+    @commands.command(name="linkfixer")
+    async def toggle_linkfixer(self, ctx: commands.Context) -> None:
+        """Toggle LinkFixer na tym serwerze.
+        
+        Wyłącza/włącza automatyczne podmienianie linków TikTok/X.
+        Wymaga uprawnienia do zarządzania wiadomościami.
+        """
+        enabled = await self.config.guild(ctx.guild).enabled()
+        await self.config.guild(ctx.guild).enabled.set(not enabled)
+        
+        new_state = "włączony ✅" if not enabled else "wyłączony ❌"
+        await ctx.send(f"LinkFixer jest teraz {new_state}")
