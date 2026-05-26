@@ -1,0 +1,15 @@
+{
+    "name": "StreamNotify",
+    "short": "Powiadomienia Twitch per streamer z osobna rola i wiadomoscia",
+    "description": "Cog monitoruje Twitch i wysyla powiadomienia o live per streamer. Dla kazdego streamera mozna ustawic osobny kanal, role do pingowania i unikalny tekst wiadomosci.",
+    "end_user_data_statement": "Ten cog przechowuje konfiguracje per serwer: login streamera, kanal docelowy, role do pingowania, szablon wiadomosci oraz techniczny identyfikator ostatnio ogloszonego streama.",
+    "install_msg": "Dziekujemy za instalacje StreamNotify! Ustaw dane Twitch API przez [p]set api twitch client_id,<ID> client_secret,<SECRET>, a potem uzyj [p]streamnotify add <login> <#kanal>.",
+    "author": ["Zirekall"],
+    "required_cogs": {},
+    "requirements": [],
+    "tags": ["twitch", "stream", "powiadomienia", "discord", "role"],
+    "min_bot_version": "3.5.0",
+    "hidden": false,
+    "disabled": false,
+    "type": "COG"
+}
