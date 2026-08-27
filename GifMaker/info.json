@@ -1,0 +1,15 @@
+{
+    "name": "GifMaker",
+    "short": "Zamienia zalaczony obrazek na jednoklatkowy gif",
+    "description": "Cog dodaje komende gif, ktora pobiera obrazek zalaczony do wiadomosci i odsyla go jako jednoklatkowy plik GIF - wygodny format, ktory Discord pozwala zapisac jako ulubiony gif. Obrazek jest przetwarzany w pamieci, nic nie jest zapisywane na dysku.",
+    "end_user_data_statement": "Ten cog nie przechowuje zadnych danych. Zalaczone obrazki sa przetwarzane wylacznie w pamieci na czas obslugi komendy.",
+    "install_msg": "Dziekujemy za instalacje GifMaker! Zalacz obrazek do wiadomosci z komenda [p]gif, aby otrzymac go jako jednoklatkowy gif gotowy do zapisania jako ulubiony gif na Discordzie.",
+    "author": ["Zirekall"],
+    "required_cogs": {},
+    "requirements": ["Pillow"],
+    "tags": ["gif", "obrazek", "image", "sticker", "meme"],
+    "min_bot_version": "3.5.0",
+    "hidden": false,
+    "disabled": false,
+    "type": "COG"
+}

@@ -1,6 +1,6 @@
 {
     "author": ["Zirekall"],
-    "description": "A collection of cogs for Red-DiscordBot, including OpenAIChat, Attendance, LinkFixer, and StreamNotify.",
+    "description": "A collection of cogs for Red-DiscordBot, including OpenAIChat, Attendance, LinkFixer, StreamNotify, and GifMaker.",
     "short": "Cogs for Red-DiscordBot by Zirekall",
-    "install_msg": "Thanks for adding Zirekall's cogs! Available cogs: OpenAIChat, Attendance, LinkFixer, StreamNotify. Use [p]cog install Zirekall-Cogs <cogname> to install individual cogs."
+    "install_msg": "Thanks for adding Zirekall's cogs! Available cogs: OpenAIChat, Attendance, LinkFixer, StreamNotify, GifMaker. Use [p]cog install Zirekall-Cogs <cogname> to install individual cogs."
   }
