@@ -1,0 +1,15 @@
+{
+    "name": "SleepGuard",
+    "short": "Wymusza sen jednemu userowi na podstawie grafiku zmian",
+    "description": "Cog nadaje wybranemu userowi role na czas snu (domyslnie 6h, konczace sie 1.5h przed startem zmiany wg grafiku zmian I/II/III wpisanego na konkretne daty), rozlacza go z kanalow glosowych w tym czasie, a po wszystkim zdejmuje role.",
+    "end_user_data_statement": "Ten cog przechowuje ID jednego wybranego usera oraz jego grafik zmian (daty i godziny startu) w konfiguracji serwera.",
+    "install_msg": "Dziekujemy za instalacje SleepGuard! Cog dziala tylko na jednym serwerze - wlasciciel bota wskazuje go komenda [p]sleepguardserwer (na tym serwerze albo z ID). Sprawdz konfiguracje komenda [p]sen status, a kolejne miesiace grafiku dopisuj komenda [p]sen miesiac. Bot potrzebuje uprawnien Zarzadzanie rolami i Przenoszenie czlonkow.",
+    "author": ["Zirekall"],
+    "required_cogs": {},
+    "requirements": [],
+    "tags": ["sen", "sleep", "rola", "grafik", "voice"],
+    "min_bot_version": "3.5.0",
+    "hidden": false,
+    "disabled": false,
+    "type": "COG"
+}
