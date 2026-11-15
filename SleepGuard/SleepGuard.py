@@ -44,6 +44,8 @@ class SleepGuard(commands.Cog):
             role_id=DEFAULT_ROLE_ID,
             sleep_hours=6.0,
             buffer_minutes=90,
+            shift_hours=8.0,
+            night_after=True,  # nocka (III): sen PO pracy zamiast przed
             shifts=default_shifts(),  # {"YYYY-MM-DD": "HH:MM"}
         )
         # Cog dziala wylacznie na jednym serwerze, ustawianym przez wlasciciela bota.
@@ -115,14 +117,16 @@ class SleepGuard(commands.Cog):
     def _now(self) -> datetime:
         return datetime.now(self.tz)
 
+    def _window_args(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "sleep_hours": float(data.get("sleep_hours", 6.0)),
+            "buffer_minutes": int(data.get("buffer_minutes", 90)),
+            "shift_hours": float(data.get("shift_hours", 8.0)),
+            "night_after": bool(data.get("night_after", True)),
+        }
+
     def _active_window(self, data: Dict[str, Any], now: datetime) -> Optional[SleepWindow]:
-        return current_window(
-            data.get("shifts") or {},
-            now,
-            self.tz,
-            float(data.get("sleep_hours", 6.0)),
-            int(data.get("buffer_minutes", 90)),
-        )
+        return current_window(data.get("shifts") or {}, now, self.tz, **self._window_args(data))
 
     def _fmt(self, moment: datetime) -> str:
         local = moment.astimezone(self.tz)
@@ -326,10 +330,9 @@ class SleepGuard(commands.Cog):
                     {day.isoformat(): value},
                     anchor,
                     self.tz,
-                    float(data["sleep_hours"]),
-                    int(data["buffer_minutes"]),
                     days_before=0,
                     days_after=0,
+                    **self._window_args(data),
                 )[0]
                 lines.append(
                     f"{prefix}  {self._shift_label(value):<12} sen {self._fmt(window.start)} -> {window.end:%H:%M}"
@@ -356,6 +359,17 @@ class SleepGuard(commands.Cog):
             return
         await self.config.guild(ctx.guild).buffer_minutes.set(minuty)
         await ctx.send(f"Sen konczy sie {minuty} min przed zmiana.")
+        await self._enforce_now(ctx.guild)
+
+    @sen.command(name="nocki")
+    async def sen_nocki(self, ctx: commands.Context, tryb: str) -> None:
+        """Ustawia kiedy jest sen przy nockach (III): `po` pracy albo `przed` praca."""
+        tryb = tryb.strip().lower()
+        if tryb not in ("po", "przed"):
+            await ctx.send("Uzyj `po` albo `przed`.")
+            return
+        await self.config.guild(ctx.guild).night_after.set(tryb == "po")
+        await ctx.send(f"Przy nockach sen bedzie {'po pracy' if tryb == 'po' else 'przed praca'}.")
         await self._enforce_now(ctx.guild)
 
     @sen.command(name="wlacz")
@@ -416,6 +430,9 @@ class SleepGuard(commands.Cog):
             f"Rola: {role.mention if role else 'brak'}\n"
             f"Sen: {float(data['sleep_hours']):g} h, konczy sie "
             f"{data['buffer_minutes']} min przed zmiana\n"
+            f"Nocki: sen **{'po pracy' if data.get('night_after', True) else 'przed praca'}**"
+            + (f" ({data['buffer_minutes']} min po koncu zmiany)" if data.get("night_after", True) else "")
+            + "\n"
             f"Teraz: **{'czas snu' if active else 'wolne'}**"
             + (f" (do {self._fmt(active.end)})" if active else "")
         )
@@ -441,10 +458,9 @@ class SleepGuard(commands.Cog):
                 data["shifts"],
                 now,
                 self.tz,
-                float(data["sleep_hours"]),
-                int(data["buffer_minutes"]),
-                days_before=0,
+                days_before=2,
                 days_after=14,
+                **self._window_args(data),
             )
             if w.end > now
         ][:5]
